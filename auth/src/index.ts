@@ -1,6 +1,8 @@
 import express from 'express';
 import 'express-async-errors';
 import { currentUserRouter } from './routes/current-user';
+import mongoose from 'mongoose';
+
 import { signinRouter } from './routes/signin';
 import { siginoutRouter } from './routes/signout';
 import { signupRouter } from './routes/signup';
@@ -20,7 +22,23 @@ app.all('*', async (req, res, next) => {
   throw new NotFoundError();
 });
 
+// Connecting to mongodb instance from the kube pod
+const start = async () => {
+  try {
+    await mongoose.connect('mongodb://auth-mongo-srv:27017/auth', {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+      useCreateIndex: true
+    })
+    console.log('Connected to mongodb');
+  } catch (err) {
+    console.log(err);
+  }
+};
+
 app.use(errorHandler);
 app.listen(3000, () => {
   console.log('Listening on port 3000')
 })
+
+start();
