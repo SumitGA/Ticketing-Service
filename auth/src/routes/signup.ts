@@ -22,9 +22,9 @@ router.post('/api/users/signup', [
 
   const { email, password } = req.body;
 
+  throw new DatabaseConnectionError();
   res.send({});
   console.log('Creating a user...')
-  throw new DatabaseConnectionError();
 })
 
 export { router as signupRouter }
