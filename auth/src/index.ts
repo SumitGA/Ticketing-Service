@@ -30,6 +30,9 @@ app.all('*', async (req, res, next) => {
 
 // Connecting to mongodb instance from the kube pod
 const start = async () => {
+  if (!process.env.JWT_KEY) {
+    throw new Error('JWT_KEY must be defined');
+  }
   try {
     await mongoose.connect('mongodb://auth-mongo-srv:27017/auth', {
       useNewUrlParser: true,
