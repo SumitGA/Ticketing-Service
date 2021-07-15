@@ -5,7 +5,7 @@ import mongoose from 'mongoose';
 import cookieSession from 'cookie-session';
 
 import { signinRouter } from './routes/signin';
-import { siginoutRouter } from './routes/signout';
+import { signoutRouter } from './routes/signout';
 import { signupRouter } from './routes/signup';
 import { errorHandler } from './middlewares/error-handler';
 import { NotFoundError } from './errors/not-found-error';
@@ -22,7 +22,7 @@ app.use(cookieSession({
 app.use(currentUserRouter);
 app.use(signinRouter);
 app.use(signupRouter);
-app.use(siginoutRouter);
+app.use(signoutRouter);
 
 app.all('*', async (req, res, next) => {
   throw new NotFoundError();
