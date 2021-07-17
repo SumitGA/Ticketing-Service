@@ -6,10 +6,9 @@ const SignUp = () => {
 
   const onSubmit = (event) => {
     event.preventDefault();
-    console.log(email, password)
-
-
+    console.log(email, password);
   }
+  
 	return (
 		<form onSubmit={onSubmit}>
 			<h1>Sign Up</h1>
