@@ -2,6 +2,8 @@ import express, { Request, Response } from 'express';
 import { body } from 'express-validator';
 import { validateRequest, NotFoundError, requireAuth, NotAuthorizedError } from '@sumitga-tickets/common';
 import { Ticket } from '../models/tickets';
+import { TicketUpdatedPublisher } from '../events/publishers/ticket-updated-publisher';
+import { natsWrapper } from '../nats-wrapper';
 
 const router = express.Router();
 
@@ -30,8 +32,13 @@ router.put('/api/tickets/:id', requireAuth, [
   });
 
   await ticket.save();
-
-  res.send({})
+  new TicketUpdatedPublisher(natsWrapper.client).publish({
+    id: ticket.id,
+    title: ticket.title,
+    price: ticket.price,
+    userId: ticket.userId
+  });
+  res.send(ticket)
 })
 
 export { router as updateTicketRouter };
