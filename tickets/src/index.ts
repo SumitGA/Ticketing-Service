@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
 import { app } from './app';
+import { natsWrapper } from "./nats-wrapper";
 
 // Connecting to mongodb instance from the kube pod
 const start = async () => {
@@ -10,6 +11,15 @@ const start = async () => {
     throw new Error('Mongo URI must be defined')
   }
   try {
+    await natsWrapper.connect('ticketing', 'asdfkl', 'http://nats-srv:4222');
+    //Closing nats connection when the server terminiates
+    natsWrapper.client.on('close', () => {
+      console.log('NATS connection closed!');
+      process.exit();
+    });
+    process.on('SIGINT', () => natsWrapper.client.close());
+    process.on('SIGTERM', () => natsWrapper.client.close());
+
     await mongoose.connect(process.env.MONGO_URI, {
       useNewUrlParser: true,
       useUnifiedTopology: true,
