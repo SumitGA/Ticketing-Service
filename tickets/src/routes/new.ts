@@ -29,6 +29,7 @@ router.post('/api/tickets', requireAuth, [
     price: ticket.price,
     userId: ticket.userId
   })
+  console.log('Published');
 
   res.status(201).send(ticket);
 });

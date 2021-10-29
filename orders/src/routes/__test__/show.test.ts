@@ -7,6 +7,7 @@ it('fetches the order', async () => {
   const cookie = await signin();
   // Crate a ticket
   const ticket = Ticket.build({
+    id: '1',
     title: 'concert',
     price: 20
   })

@@ -9,6 +9,7 @@ it('marks an order as cancelled', async () => {
   const cookie = await signin();
   // Create a ticket with Ticket model
   const ticket = Ticket.build({
+    id: '1',
     title: 'concert',
     price: 20
   });
@@ -36,6 +37,7 @@ it('Emits an order cancelled event', async () => {
   const cookie = await signin();
   // Create a ticket with Ticket model
   const ticket = Ticket.build({
+    id: '1',
     title: 'concert',
     price: 20
   });

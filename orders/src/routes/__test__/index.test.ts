@@ -6,6 +6,7 @@ import { signin } from '../../test/setup';
 
 const buildTicket = async () => {
   const ticket = Ticket.build({
+    id: '1',
     title: 'concet',
     price: 20
   })

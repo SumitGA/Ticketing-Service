@@ -22,6 +22,7 @@ it('returns an error if the ticket does not exists', async () => {
 it('return an error if the ticket is already reserved', async () => {
   const cookie = await signin();
   const ticket = Ticket.build({
+    id: '1',
     title: 'concert',
     price: 20
   });
@@ -44,6 +45,7 @@ it('return an error if the ticket is already reserved', async () => {
 it('reserves a ticket', async () => {
   const cookie = await signin();
   const ticket = Ticket.build({
+    id: '1',
     title: 'concert',
     price: 20
   });
@@ -59,6 +61,7 @@ it('reserves a ticket', async () => {
 it('emits an order created event', async () => {
   const cookie = await signin();
   const ticket = Ticket.build({
+    id: '1',
     title: 'concert',
     price: 20
   });
