@@ -1,4 +1,5 @@
 import request from 'supertest';
+import mongoose from 'mongoose';
 import { app } from '../../app';
 import { Ticket } from '../../models/ticket';
 import { signin } from '../../test/setup';
@@ -7,7 +8,7 @@ it('fetches the order', async () => {
   const cookie = await signin();
   // Crate a ticket
   const ticket = Ticket.build({
-    id: '1',
+    id: mongoose.Types.ObjectId().toHexString(),
     title: 'concert',
     price: 20
   })
