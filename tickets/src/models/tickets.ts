@@ -1,6 +1,5 @@
 import mongoose from 'mongoose';
 import { updateIfCurrentPlugin } from 'mongoose-update-if-current';
-import { updateIf } from 'typescript';
 
 interface TicketAttrs {
   title: string,

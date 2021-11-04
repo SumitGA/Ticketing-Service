@@ -15,6 +15,9 @@ spec:
       containers:
         - name: client
           image: 9843/client
+          env:
+            - name: NODE_OPTIONS
+              value: "--openssl-legacy-provider"
 
 ---
 apiVersion: v1
