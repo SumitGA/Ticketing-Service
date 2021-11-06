@@ -3,6 +3,7 @@ import { app } from './app';
 
 // Connecting to mongodb instance from the kube pod
 const start = async () => {
+  console.log('Starting up the server ......')
   if (!process.env.JWT_KEY) {
     throw new Error('JWT_KEY must be defined');
   }
