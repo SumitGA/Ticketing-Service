@@ -6,6 +6,8 @@ import jwt from 'jsonwebtoken';
 
 jest.mock('../nats-wrapper');
 
+process.env.STRIPE_KEY = 'sk_test_88ecQjRsfmHyDBoEedT6Wc9h';
+
 let mongo: any
 beforeAll(async () => {
   process.env.JWT_KEY = 'asdf';

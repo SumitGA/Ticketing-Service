@@ -6,7 +6,9 @@ const AppComponent = ({ Component, pageProps, currentUser }) => {
 	return (
 		<div>
       <Header currentUser={currentUser}/>
-			<Component {...pageProps} />
+			<div className="container">
+				<Component currentUser={currentUser} {...pageProps} />
+			</div>
 		</div>
 	);
 };
@@ -18,7 +20,7 @@ AppComponent.getInitialProps = async (appContext) => {
 	// Calling getInitialProps of Landing page and manually sending back data to the Landing page
 	let pageProps = {};
 	if (appContext.Component.getInitialProps) {
-		pageProps = await appContext.Component.getInitialProps(appContext.ctx);
+		pageProps = await appContext.Component.getInitialProps(appContext.ctx, client, data.curerntUser);
 	}
   //Returning data and props to all the pages
 	return {
